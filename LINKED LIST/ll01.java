@@ -243,6 +243,298 @@ import java.util.*;
 //    }
 //}
 
+// Deltion of Node from starting
+
+//class Node {
+//    int data;
+//    Node next;
+//
+//    Node(int data) {
+//        this.data = data;
+//        this.next = null;
+//    }
+//}
+//
+//public class ll01 {
+//    Node head;
+//
+//    void add(int data) {
+//        Node newNode = new Node(data);
+//
+//        if (head == null) {
+//            head = newNode;
+//            return;
+//        }
+//
+//        Node temp = head;
+//        while (temp.next != null) {
+//            temp = temp.next;
+//        }
+//        temp.next = newNode;
+//    }
+//
+//    void deleteBeginning() {
+//        if (head == null) {
+//            System.out.println("List is empty! Nothing to delete.");
+//            return;
+//        }
+//        head = head.next;
+//        System.out.println("Node deleted from beginning.");
+//    }
+//
+//    void print() {
+//        if (head == null) {
+//            System.out.println("List is empty.");
+//            return;
+//        }
+//
+//        Node current = head;
+//        while (current != null) {
+//            System.out.print(current.data + " -> ");
+//            current = current.next;
+//        }
+//        System.out.println("NULL");
+//    }
+//
+//        void main() {
+//        Linked_List list = new Linked_List();
+//
+//        list.add(10);
+//        list.add(20);
+//        list.add(30);
+//        list.add(40);
+//
+//        System.out.println("Original List:");
+//        list.print();
+//
+//        list.deleteBeginning();
+//
+//        System.out.println("\nAfter deleting from beginning:");
+//        list.print();
+//    }
+//}
+
+// DELETION FROM LAST OF LINKED LIST+++++++++++++++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//class Node {
+//    int data;
+//    Node next;
+//
+//    Node(int data) {
+//        this.data = data;
+//        this.next = null;
+//    }
+//}
+//
+//public class ll01 {
+//    Node head;
+//
+//    void add(int data) {
+//        Node newNode = new Node(data);
+//
+//        if (head == null) {
+//            head = newNode;
+//            return;
+//        }
+//
+//        Node temp = head;
+//        while (temp.next != null) {
+//            temp = temp.next;
+//        }
+//        temp.next = newNode;
+//    }
+//
+//    void Print() {
+//        if (head == null) {
+//            System.out.println("List is empty.");
+//            return;
+//        }
+//
+//        Node current = head;
+//        while (current != null) {
+//            System.out.print(current.data + " -> ");
+//            current = current.next;
+//        }
+//        System.out.println("NULL");
+//    }
+//
+//    void DeleteLast() {
+//        if (head == null) {
+//            System.out.println("List is empty. Nothing to delete.");
+//            return;
+//        }
+//
+//        if (head.next == null) {
+//            head = null;
+//            System.out.println("Deleted the only node in the list.");
+//            return;
+//        }
+//
+//        Node temp = head;
+//        while (temp.next.next != null) {
+//            temp = temp.next;
+//        }
+//
+//        temp.next = null;  // Remove the last node
+//        System.out.println("Deleted node from the end.");
+//    }
+//
+//        void main() {
+//        ll01 l = new ll01();
+//
+//        l.add(10);
+//        l.add(20);
+//        l.add(30);
+//        l.add(40);
+//
+//        System.out.println("BEFORE DELETION FROM LAST:");
+//        l.Print();
+//
+//        l.DeleteLast();
+//
+//        System.out.println("\nAFTER DELETION FROM LAST:");
+//        l.Print();
+//    }
+//}
+
+// DELETE A NODE FROM SPECIFIC POSITION
+
+class Node{
+   int data;
+   Node next;
+
+   Node(int data){
+       this.data = data;
+       this.next = null;
+   }
+}
+
+public class ll01 {
+   Node head;
+
+   void add(int data){
+       Node newNode = new Node(data);
+       if (head == null){
+           head = newNode;
+           return;
+       }
+
+       Node temp = head;
+       while (temp.next != null){
+           temp = temp.next;
+       }
+       temp.next = new Node(data);
+   }
+   void Print(){
+       Node current = head;
+
+       while (current != null){
+           System.out.print(current.data + " -> ");
+           current = current.next;
+       }
+       System.out.println("NULL");
+   }
+
+   void DelSpecific(int key){
+
+       // if head itself hold the key
+       if (head.data == key){
+           head = head.next;
+           return;
+       }
+       Node temp = head;
+       Node prev = null;
+
+       while (temp != null && temp.data != key){
+           prev = temp;
+           temp = temp.next;
+       }
+       if (temp == null) {
+           System.out.println("Value " + key + " not found in the list.");
+           return;
+       }
+       // Unlink the node
+       prev.next = temp.next;
+       System.out.println("Deleted node with value " + key);
+   }
+
+   void main(){
+       ll01 l = new ll01();
+       l.add(10);
+       l.add(20);
+       l.add(30);
+       l.add(40);
+       l.add(50);
+       l.add(60);
+
+       l.Print();
+       l.DelSpecific(30);
+       l.Print();
+   }
+}
+
+// SEARCH AN ELEMENT IN THE LINKED LIST
+
+//    class Node{
+//        int data;
+//        Node next;
+
+//        Node(int data){
+//            this.data = data;
+//            this.next = null;
+//        }
+//    }
+
+//    public class ll01 {
+//        Node head;
+
+//        void add(int data){
+//            Node newNode = new Node(data);
+//            if (head == null){
+//                head = newNode;
+//                return;
+//            }
+//            Node temp = head;
+//            while (temp.next != null){
+//                temp = temp.next;
+//            }
+//            temp.next = new Node(data);
+//        }
+//        void Print(){
+//            Node current = head;
+//            while (current != null){
+//                System.out.print(current.data + " -> ");
+//                current = current.next;
+//            }
+//            System.out.println("NULL");
+//        }
+//        void Search(int key){
+//            if (head == null){
+//                return;
+//            }
+//            Node temp = head;
+//            int position = 1;
+//            while (temp != null){
+//                if (temp.data == key){
+//                    System.out.println("KEY:"+key + " FOUND AT: "+ position);
+//                    return;
+//                }
+//                temp = temp.next;
+//                position++;
+//            }
+//        }
+//        void main(){
+//            ll01 list = new ll01();
+//            list.add(10);
+//            list.add(20);
+//            list.add(30);
+//            list.add(40);
+//            list.Print();
+//            list.Search(30);
+
+//        }
+// }
+
 
 
 
