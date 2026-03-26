@@ -399,79 +399,79 @@ import java.util.*;
 
 // DELETE A NODE FROM SPECIFIC POSITION
 
-class Node{
-   int data;
-   Node next;
+// class Node{
+//    int data;
+//    Node next;
 
-   Node(int data){
-       this.data = data;
-       this.next = null;
-   }
-}
+//    Node(int data){
+//        this.data = data;
+//        this.next = null;
+//    }
+// }
 
-public class ll01 {
-   Node head;
+// public class ll01 {
+//    Node head;
 
-   void add(int data){
-       Node newNode = new Node(data);
-       if (head == null){
-           head = newNode;
-           return;
-       }
+//    void add(int data){
+//        Node newNode = new Node(data);
+//        if (head == null){
+//            head = newNode;
+//            return;
+//        }
 
-       Node temp = head;
-       while (temp.next != null){
-           temp = temp.next;
-       }
-       temp.next = new Node(data);
-   }
-   void Print(){
-       Node current = head;
+//        Node temp = head;
+//        while (temp.next != null){
+//            temp = temp.next;
+//        }
+//        temp.next = new Node(data);
+//    }
+//    void Print(){
+//        Node current = head;
 
-       while (current != null){
-           System.out.print(current.data + " -> ");
-           current = current.next;
-       }
-       System.out.println("NULL");
-   }
+//        while (current != null){
+//            System.out.print(current.data + " -> ");
+//            current = current.next;
+//        }
+//        System.out.println("NULL");
+//    }
 
-   void DelSpecific(int key){
+//    void DelSpecific(int key){
 
-       // if head itself hold the key
-       if (head.data == key){
-           head = head.next;
-           return;
-       }
-       Node temp = head;
-       Node prev = null;
+//        // if head itself hold the key
+//        if (head.data == key){
+//            head = head.next;
+//            return;
+//        }
+//        Node temp = head;
+//        Node prev = null;
 
-       while (temp != null && temp.data != key){
-           prev = temp;
-           temp = temp.next;
-       }
-       if (temp == null) {
-           System.out.println("Value " + key + " not found in the list.");
-           return;
-       }
-       // Unlink the node
-       prev.next = temp.next;
-       System.out.println("Deleted node with value " + key);
-   }
+//        while (temp != null && temp.data != key){
+//            prev = temp;
+//            temp = temp.next;
+//        }
+//        if (temp == null) {
+//            System.out.println("Value " + key + " not found in the list.");
+//            return;
+//        }
+//        // Unlink the node
+//        prev.next = temp.next;
+//        System.out.println("Deleted node with value " + key);
+//    }
 
-   void main(){
-       ll01 l = new ll01();
-       l.add(10);
-       l.add(20);
-       l.add(30);
-       l.add(40);
-       l.add(50);
-       l.add(60);
+//    void main(){
+//        ll01 l = new ll01();
+//        l.add(10);
+//        l.add(20);
+//        l.add(30);
+//        l.add(40);
+//        l.add(50);
+//        l.add(60);
 
-       l.Print();
-       l.DelSpecific(30);
-       l.Print();
-   }
-}
+//        l.Print();
+//        l.DelSpecific(30);
+//        l.Print();
+//    }
+// }
 
 // SEARCH AN ELEMENT IN THE LINKED LIST
 
@@ -534,6 +534,64 @@ public class ll01 {
 
 //        }
 // }
+
+// FINDING THE LENGTH OF THE LINKED LIST
+
+   class Node{
+   int data;
+   Node next;
+
+   Node(int data){
+       this.data = data;
+       this.next = null;
+   }
+   }
+
+public class ll01 {
+   Node head;
+
+   void add(int data){
+       Node newNode = new Node(data);
+       if (head == null){
+           head = newNode;
+           return;
+       }
+       Node temp = head;
+       while (temp.next != null){
+           temp = temp.next;
+       }
+       temp.next = new Node(data);
+   }
+   void Print(){
+       Node current = head;
+       while (current != null){
+           System.out.print(current.data +" -> ");
+           current = current.next;
+       }
+       System.out.println("NULL");
+   }
+   void Length(){
+       int count = 0;
+       Node temp = head;
+       while (temp != null){
+           temp = temp.next;
+           count++;
+       }
+       System.out.println("LENGTH OF LINKEDLIST IS: "+count);
+   }
+   void main(){
+       ll01 list = new ll01();
+
+       list.add(10);
+       list.add(20);
+       list.add(30);
+       list.add(40);
+       list.Print();
+
+       list.Length();
+   }
+}
+
 
 
 
