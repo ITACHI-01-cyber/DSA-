@@ -537,62 +537,122 @@ import java.util.*;
 
 // FINDING THE LENGTH OF THE LINKED LIST
 
+//    class Node{
+//    int data;
+//    Node next;
+
+//    Node(int data){
+//        this.data = data;
+//        this.next = null;
+//    }
+//    }
+
+// public class ll01 {
+//    Node head;
+
+//    void add(int data){
+//        Node newNode = new Node(data);
+//        if (head == null){
+//            head = newNode;
+//            return;
+//        }
+//        Node temp = head;
+//        while (temp.next != null){
+//            temp = temp.next;
+//        }
+//        temp.next = new Node(data);
+//    }
+//    void Print(){
+//        Node current = head;
+//        while (current != null){
+//            System.out.print(current.data +" -> ");
+//            current = current.next;
+//        }
+//        System.out.println("NULL");
+//    }
+//    void Length(){
+//        int count = 0;
+//        Node temp = head;
+//        while (temp != null){
+//            temp = temp.next;
+//            count++;
+//        }
+//        System.out.println("LENGTH OF LINKEDLIST IS: "+count);
+//    }
+//    void main(){
+//        ll01 list = new ll01();
+
+//        list.add(10);
+//        list.add(20);
+//        list.add(30);
+//        list.add(40);
+//        list.Print();
+
+//        list.Length();
+//    }
+// }
+
+//  REVERSE A LINKED LIST +++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
    class Node{
-   int data;
-   Node next;
+       int data;
+       Node next;
 
-   Node(int data){
-       this.data = data;
-       this.next = null;
-   }
-   }
-
-public class ll01 {
-   Node head;
-
-   void add(int data){
-       Node newNode = new Node(data);
-       if (head == null){
-           head = newNode;
-           return;
+       Node(int data){
+           this.data = data;
+           this.next = null;
        }
-       Node temp = head;
-       while (temp.next != null){
-           temp = temp.next;
-       }
-       temp.next = new Node(data);
-   }
-   void Print(){
-       Node current = head;
-       while (current != null){
-           System.out.print(current.data +" -> ");
-           current = current.next;
-       }
-       System.out.println("NULL");
-   }
-   void Length(){
-       int count = 0;
-       Node temp = head;
-       while (temp != null){
-           temp = temp.next;
-           count++;
-       }
-       System.out.println("LENGTH OF LINKEDLIST IS: "+count);
-   }
-   void main(){
-       ll01 list = new ll01();
-
-       list.add(10);
-       list.add(20);
-       list.add(30);
-       list.add(40);
-       list.Print();
-
-       list.Length();
-   }
 }
 
+public class ll01 {
+       Node head;
 
+       void add(int data){
+           Node newNode = new Node(data);
+           if (head == null){
+               head = newNode;
+               return;
+           }
+           Node temp = head;
+           while (temp.next != null){
+               temp = temp.next;
+           }
+           temp.next = new Node(data);
+       }
+       void Print(){
+           Node current = head;
+           while (current != null){
+               System.out.print(current.data +" -> ");
+               current = current.next;
+           }
+           System.out.println("NULL");
+       }
+   Node reverseList(Node head) {
+       Node prev = null;
+       Node curr = head;
+
+       while (curr != null) {
+           Node nextTemp = curr.next;
+           curr.next = prev;
+           prev = curr;
+           curr = nextTemp;
+       }
+
+       return prev;
+   }
+       void main(){
+           ll01 list = new ll01();
+           list.add(10);
+           list.add(20);
+           list.add(30);
+           list.add(40);
+           System.out.println("NORMAL LINKED LIST: ");
+           list.Print();
+           list.head = list.reverseList(list.head);
+           System.out.println("REVERSED LINKED LIST: ");
+           list.Print();
+       }
+}
 
 
 
