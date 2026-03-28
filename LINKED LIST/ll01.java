@@ -594,66 +594,122 @@ import java.util.*;
 
 //  REVERSE A LINKED LIST +++++++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-   class Node{
-       int data;
-       Node next;
+//    class Node{
+//        int data;
+//        Node next;
 
-       Node(int data){
-           this.data = data;
-           this.next = null;
-       }
+//        Node(int data){
+//            this.data = data;
+//            this.next = null;
+//        }
+// }
+
+// public class ll01 {
+//        Node head;
+
+//        void add(int data){
+//            Node newNode = new Node(data);
+//            if (head == null){
+//                head = newNode;
+//                return;
+//            }
+//            Node temp = head;
+//            while (temp.next != null){
+//                temp = temp.next;
+//            }
+//            temp.next = new Node(data);
+//        }
+//        void Print(){
+//            Node current = head;
+//            while (current != null){
+//                System.out.print(current.data +" -> ");
+//                current = current.next;
+//            }
+//            System.out.println("NULL");
+//        }
+//    Node reverseList(Node head) {
+//        Node prev = null;
+//        Node curr = head;
+
+//        while (curr != null) {
+//            Node nextTemp = curr.next;
+//            curr.next = prev;
+//            prev = curr;
+//            curr = nextTemp;
+//        }
+
+//        return prev;
+//    }
+//        void main(){
+//            ll01 list = new ll01();
+//            list.add(10);
+//            list.add(20);
+//            list.add(30);
+//            list.add(40);
+//            System.out.println("NORMAL LINKED LIST: ");
+//            list.Print();
+//            list.head = list.reverseList(list.head);
+//            System.out.println("REVERSED LINKED LIST: ");
+//            list.Print();
+//        }
+// }
+
+// FIND MIDDLE IN LINKED LIST +++++++++++++++++++++++++++>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+class Node{
+   int data;
+   Node next;
+
+   Node(int data){
+       this.data = data;
+       this.next = null;
+   }
 }
 
 public class ll01 {
-       Node head;
-
-       void add(int data){
-           Node newNode = new Node(data);
-           if (head == null){
-               head = newNode;
-               return;
-           }
-           Node temp = head;
-           while (temp.next != null){
-               temp = temp.next;
-           }
-           temp.next = new Node(data);
+   Node head;
+   void add(int data){
+       Node newNode = new Node(data);
+       if (head == null){
+           head = newNode;
+           return;
        }
-       void Print(){
-           Node current = head;
-           while (current != null){
-               System.out.print(current.data +" -> ");
-               current = current.next;
-           }
-           System.out.println("NULL");
+       Node temp = head;
+       while (temp.next != null){
+           temp = temp.next;
        }
-   Node reverseList(Node head) {
-       Node prev = null;
-       Node curr = head;
-
-       while (curr != null) {
-           Node nextTemp = curr.next;
-           curr.next = prev;
-           prev = curr;
-           curr = nextTemp;
-       }
-
-       return prev;
+       temp.next = new Node(data);
    }
-       void main(){
-           ll01 list = new ll01();
-           list.add(10);
-           list.add(20);
-           list.add(30);
-           list.add(40);
-           System.out.println("NORMAL LINKED LIST: ");
-           list.Print();
-           list.head = list.reverseList(list.head);
-           System.out.println("REVERSED LINKED LIST: ");
-           list.Print();
+   void Print(){
+       Node current = head;
+       while (current != null){
+           System.out.print(current.data+" -> ");
+           current = current.next;
        }
-}
+       System.out.println("NULL");
+   }
+   Node Findmid(){
+       Node slow = head;
+       Node fast = head;
 
+       while (fast != null && fast.next !=null){
+           slow = slow.next;
+           fast = fast.next.next;
+       }
+       return slow;
+   }
+   void main(){
+   ll01 list = new ll01();
+       list.add(10);
+       list.add(20);
+       list.add(30);
+       list.add(40);
+       list.add(50);
+
+       list.Print();
+       System.out.println("Middle (odd list): " + list.Findmid().data);
+   }
+}
 
 
 
