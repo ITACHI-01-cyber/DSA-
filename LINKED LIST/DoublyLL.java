@@ -141,89 +141,166 @@ import java.util.*;
 
 // DELETION IN DOUBLY LINKED LIST beg,end,specific
 
-    class Node{
-        int data;
-        Node next;
-        Node prev;
+//     class Node{
+//         int data;
+//         Node next;
+//         Node prev;
 
-        Node(int data){
-            this.data = data;
-            this.next = null;
-            this.prev = null;
+//         Node(int data){
+//             this.data = data;
+//             this.next = null;
+//             this.prev = null;
 
-        }
+//         }
+//     }
+// public class DoublyLL {
+//         Node head;
+
+//         void Add(int data){
+//             Node newNode = new Node(data);
+//             if (head == null){
+//                 head = newNode;
+//                 return;
+//             }
+//             Node temp = head;
+//             while (temp.next != null){
+//                 temp = temp.next;
+//             }
+//              temp.next = newNode;
+//             newNode.prev = temp;
+//         }
+
+//         void Print(){
+//             Node current = head;
+//             System.out.print(" null <-> ");
+//             while (current != null){
+//                 System.out.print(current.data + " <-> ");
+//                 current = current.next;
+//             }
+//             System.out.println("null");
+//         }
+//         void delBeg(){
+//             Node temp = head;
+//             head = head.next;
+//         }
+
+//         void delLast(){
+//             Node temp = head;
+//             while (temp.next.next != null){
+//                 temp = temp.next;
+//             }
+//             temp.next = null;
+//         }
+
+//         boolean delSpecific(int pos){
+//             Node current = head;
+//             for (int i = 1; i < pos; i++) {
+//                 if (current == null) return false;
+//                 current = current.next;
+//             }
+//             if (current != null) {
+//                 if (current.prev != null) {
+//                     current.prev.next = current.next;
+//                 } else {
+//                     head = current.next;
+//                 }
+//                 if (current.next != null) {
+//                     current.next.prev = current.prev;
+//                 }
+//                 return true;
+//             }
+//             return false;
+//         }
+//         void main(){
+//             DoublyLL dbl = new DoublyLL();
+//             dbl.Add(10);
+//             dbl.Add(20);
+//             dbl.Add(30);
+//             dbl.Add(40);
+//             dbl.Add(50);
+//             dbl.Print();
+//             dbl.delSpecific(2);
+//             dbl.Print();
+//             dbl.delBeg();
+//             dbl.Print();
+//             dbl.delLast();
+//             dbl.Print();
+//         }
+// }
+
+// SEARCHING IN THE DOUBLY LINKED LIST
+
+class Node {
+    int data;
+    Node next;
+    Node prev;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
     }
-public class DoublyLL {
-        Node head;
+}
 
-        void Add(int data){
-            Node newNode = new Node(data);
-            if (head == null){
-                head = newNode;
-                return;
-            }
+public class DoublyLL {
+    private Node head;
+
+    void add(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
             Node temp = head;
-            while (temp.next != null){
+            while (temp.next != null) {
                 temp = temp.next;
             }
-             temp.next = newNode;
+            temp.next = newNode;
             newNode.prev = temp;
         }
+    }
 
-        void Print(){
-            Node current = head;
-            System.out.print(" null <-> ");
-            while (current != null){
-                System.out.print(current.data + " <-> ");
-                current = current.next;
-            }
-            System.out.println("null");
+    void Print() {
+        Node current = head;
+        System.out.print("List: ");
+        if (head == null) {
+            System.out.println("List is empty");
+            return;
         }
-        void delBeg(){
-            Node temp = head;
-            head = head.next;
+        while (current != null) {
+            System.out.print(current.data);
+            if (current.next != null) System.out.print(" <-> ");
+            current = current.next;
         }
+        System.out.println();
+    }
 
-        void delLast(){
-            Node temp = head;
-            while (temp.next.next != null){
-                temp = temp.next;
+    int Search(int key) {
+        Node temp = head;
+        int count = 0;
+        while (temp != null) {
+            if (temp.data == key) {
+                return count + 1;
             }
-            temp.next = null;
+            temp = temp.next;
+            count++;
         }
+        return -1;
+    }
 
-        boolean delSpecific(int pos){
-            Node current = head;
-            for (int i = 1; i < pos; i++) {
-                if (current == null) return false;
-                current = current.next;
-            }
-            if (current != null) {
-                if (current.prev != null) {
-                    current.prev.next = current.next;
-                } else {
-                    head = current.next;
-                }
-                if (current.next != null) {
-                    current.next.prev = current.prev;
-                }
-                return true;
-            }
-            return false;
+        void main(String[] args) {
+        DoublyLL list = new DoublyLL();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(40);
+        list.add(50);
+        list.Print();
+
+        int position = list.Search(30);
+        if (position != -1) {
+            System.out.println("Element 30 found at position: " + position);
+        } else {
+            System.out.println("Element not found");
         }
-        void main(){
-            DoublyLL dbl = new DoublyLL();
-            dbl.Add(10);
-            dbl.Add(20);
-            dbl.Add(30);
-            dbl.Add(40);
-            dbl.Add(50);
-            dbl.Print();
-            dbl.delSpecific(2);
-            dbl.Print();
-            dbl.delBeg();
-            dbl.Print();
-            dbl.delLast();
-            dbl.Print();
-        }
+    }
 }
