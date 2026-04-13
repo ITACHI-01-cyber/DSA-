@@ -439,103 +439,176 @@ import java.util.*;
 // FOURTH APPROACH 
 //  USING K GRUP APPROACH FOR THIS REVERSALL ===================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
     
-    class Node{
-        int data;
-        Node next;
-        Node(int data){
-            this.data = data;
-            this.next = null;
-        }
+//     class Node{
+//         int data;
+//         Node next;
+//         Node(int data){
+//             this.data = data;
+//             this.next = null;
+//         }
+//     }
+
+// public class LLleet {
+//     Node head;
+
+//     void add(int data){
+//         Node newnode = new Node(data);
+//         if(head == null){
+//             head = newnode;
+//             return;
+//         }
+//         Node temp = head;
+//         while(temp.next != null){
+//             temp = temp.next;
+//         }
+//         temp.next = newnode;
+//     }
+//     void Print(){
+//         Node curr = head;
+//         while (curr != null) {
+//             System.out.print(curr.data + " -> ");
+//             curr = curr.next;
+//         }
+//         System.out.println("NULL");
+//     }
+
+//     Node kRev(Node head, int k) {
+//         Node prev = null;
+//         Node curr = head;
+//         Node next;
+
+//         for (int i = 0; i < k && curr != null; i++) {
+//             next = curr.next;
+//             curr.next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+//         return prev; // new head of reversed k-group
+//     }
+
+//     // Reverse the list in groups of size k
+//     Node reverseKGroup(Node head, int k) {
+//         if (head == null || k <= 1) return head;
+
+//         Node dummy = new Node(0);
+//         dummy.next = head;
+//         Node prevGroupTail = dummy; // tail of previous reversed group
+
+//         while (true) {
+//             // Check if at least k nodes exist from here
+//             Node current = prevGroupTail;
+//             for (int i = 0; i < k; i++) {
+//                 current = current.next;
+//                 if (current == null) {
+//                     // Less than k nodes left → return result
+//                     return dummy.next;
+//                 }
+//             }
+
+//             Node groupHead = prevGroupTail.next;      // first node of this group
+//             Node nextGroupHead = current.next;        // first node of next group
+
+//             // Disconnect current group
+//             current.next = null;
+
+//             // Reverse this group of k nodes
+//             Node newGroupHead = kRev(groupHead, k);   // use helper, not recursive reverseK
+
+//             // Re-link: prevGroupTail → newGroupHead
+//             prevGroupTail.next = newGroupHead;
+
+//             // Original head (groupHead) is now the tail of reversed group
+//             groupHead.next = nextGroupHead;
+
+//             // Move tail pointer to this group's tail
+//             prevGroupTail = groupHead;
+//         }
+//     }
+    
+//     void main(){
+//         LLleet list = new LLleet();
+//         list.add(20);
+//         list.add(40);
+//         list.add(60);
+//         list.add(80);
+//         list.add(100);
+//         list.add(120);
+//         list.Print();
+
+//         list.head = list.reverseKGroup(list.head, 3);
+//         list.Print();
+//     }
+// }
+
+//  MERGEING LINKED LIST 
+//  THREE TYPES OF LIST AND DIFFRENT MERGING IN THREE TYPES =
+//  ->  1) Merge Two Sorted Lists , -> dOUBLY lINKED LIST , -> CIRCULAR LINKEDLIST
+
+//  1) Merge Two Sorted Lists
+
+class Node{
+    int data;
+    Node next;
+
+    Node(int data){
+        this.data = data;
+        this.next = null;
     }
+}
 
 public class LLleet {
     Node head;
 
     void add(int data){
-        Node newnode = new Node(data);
+        Node newNode = new Node(data);
         if(head == null){
-            head = newnode;
+            head = newNode;
             return;
         }
         Node temp = head;
-        while(temp.next != null){
+        while (temp.next != null) {
             temp = temp.next;
         }
-        temp.next = newnode;
+        temp.next = newNode;
     }
-    void Print(){
+    void print(Node head){
         Node curr = head;
         while (curr != null) {
-            System.out.print(curr.data + " -> ");
+            System.out.print( curr.data + " -> ");
             curr = curr.next;
         }
-        System.out.println("NULL");
+        System.out.println("Null");
     }
 
-    Node kRev(Node head, int k) {
-        Node prev = null;
-        Node curr = head;
-        Node next;
+    Node MeregeTwoSortedList(Node list1, Node list2){
+        Node dummy = new Node(-1);
+        Node tail = dummy;
 
-        for (int i = 0; i < k && curr != null; i++) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev; // new head of reversed k-group
-    }
-
-    // Reverse the list in groups of size k
-    Node reverseKGroup(Node head, int k) {
-        if (head == null || k <= 1) return head;
-
-        Node dummy = new Node(0);
-        dummy.next = head;
-        Node prevGroupTail = dummy; // tail of previous reversed group
-
-        while (true) {
-            // Check if at least k nodes exist from here
-            Node current = prevGroupTail;
-            for (int i = 0; i < k; i++) {
-                current = current.next;
-                if (current == null) {
-                    // Less than k nodes left → return result
-                    return dummy.next;
-                }
+        while(list1 != null && list2 != null){
+            if(list1.data <= list2.data){
+                tail.next = list1;
+                list1 = list1.next;
+            }else{
+                tail.next = list2;
+                list2 = list2.next;
             }
-
-            Node groupHead = prevGroupTail.next;      // first node of this group
-            Node nextGroupHead = current.next;        // first node of next group
-
-            // Disconnect current group
-            current.next = null;
-
-            // Reverse this group of k nodes
-            Node newGroupHead = kRev(groupHead, k);   // use helper, not recursive reverseK
-
-            // Re-link: prevGroupTail → newGroupHead
-            prevGroupTail.next = newGroupHead;
-
-            // Original head (groupHead) is now the tail of reversed group
-            groupHead.next = nextGroupHead;
-
-            // Move tail pointer to this group's tail
-            prevGroupTail = groupHead;
+            tail = tail.next;
         }
+        tail.next = (list1 != null)? list1 : list2;
+        return dummy.next;
     }
-    
-    void main(){
-        LLleet list = new LLleet();
-        list.add(20);
-        list.add(40);
-        list.add(60);
-        list.add(80);
-        list.add(100);
-        list.add(120);
-        list.Print();
 
-        list.head = list.reverseKGroup(list.head, 3);
-        list.Print();
+    void main(){
+        LLleet sol = new LLleet();
+        Node l1 = new Node(1);
+        l1.next = new Node(2);
+        l1.next.next = new Node(4);
+
+        Node l2 = new Node(1);
+        l2.next = new Node(3);
+        l2.next.next = new Node(4);
+
+        Node merge = sol.MeregeTwoSortedList(l1, l2);
+        sol.print(merge);
     }
 }
