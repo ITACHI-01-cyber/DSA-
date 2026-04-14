@@ -546,18 +546,92 @@ import java.util.*;
 
 //  1) Merge Two Sorted Lists
 
+// class Node{
+//     int data;
+//     Node next;
+
+//     Node(int data){
+//         this.data = data;
+//         this.next = null;
+//     }
+// }
+
+// public class LLleet {
+//     Node head;
+
+//     void add(int data){
+//         Node newNode = new Node(data);
+//         if(head == null){
+//             head = newNode;
+//             return;
+//         }
+//         Node temp = head;
+//         while (temp.next != null) {
+//             temp = temp.next;
+//         }
+//         temp.next = newNode;
+//     }
+//     void print(Node head){
+//         Node curr = head;
+//         while (curr != null) {
+//             System.out.print( curr.data + " -> ");
+//             curr = curr.next;
+//         }
+//         System.out.println("Null");
+//     }
+
+//     Node MeregeTwoSortedList(Node list1, Node list2){
+//         Node dummy = new Node(-1);
+//         Node tail = dummy;
+
+//         while(list1 != null && list2 != null){
+//             if(list1.data <= list2.data){
+//                 tail.next = list1;
+//                 list1 = list1.next;
+//             }else{
+//                 tail.next = list2;
+//                 list2 = list2.next;
+//             }
+//             tail = tail.next;
+//         }
+//         tail.next = (list1 != null)? list1 : list2;
+//         return dummy.next;
+//     }
+
+//     void main(){
+//         LLleet sol = new LLleet();
+//         Node l1 = new Node(1);
+//         l1.next = new Node(2);
+//         l1.next.next = new Node(4);
+
+//         Node l2 = new Node(1);
+//         l2.next = new Node(3);
+//         l2.next.next = new Node(4);
+
+//         Node merge = sol.MeregeTwoSortedList(l1, l2);
+//         sol.print(merge);
+//     }
+// }
+
+// 2) Merge K Sorted Lists
+// K sorted lists ko merge karo using priority queue (min-heap). Heap size K, time O(N log K).
+
+import java.util.PriorityQueue;
+
 class Node{
     int data;
     Node next;
+    Node prev;
 
     Node(int data){
         this.data = data;
         this.next = null;
+        this.prev = null;
     }
 }
 
 public class LLleet {
-    Node head;
+Node head;
 
     void add(int data){
         Node newNode = new Node(data);
@@ -566,49 +640,72 @@ public class LLleet {
             return;
         }
         Node temp = head;
-        while (temp.next != null) {
+        while(temp.next != null){
             temp = temp.next;
         }
         temp.next = newNode;
+        newNode.prev = temp;
     }
-    void print(Node head){
-        Node curr = head;
-        while (curr != null) {
-            System.out.print( curr.data + " -> ");
-            curr = curr.next;
+    void Print(Node node) {
+        System.out.print("List: ");
+        if (node == null) {
+            System.out.println("List is empty");
+            return;
         }
-        System.out.println("Null");
+        while (node != null) {
+            System.out.print(node.data);
+            if (node.next != null) System.out.print(" <-> ");
+            node = node.next;
+        }
+        System.out.println(" <-> NULL");
     }
 
-    Node MeregeTwoSortedList(Node list1, Node list2){
+    Node mergeKLists(Node[] lists) {
+        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.data - b.data);
+
+        for (Node node : lists) {
+            if (node != null) pq.offer(node);
+        }
+
         Node dummy = new Node(-1);
         Node tail = dummy;
 
-        while(list1 != null && list2 != null){
-            if(list1.data <= list2.data){
-                tail.next = list1;
-                list1 = list1.next;
-            }else{
-                tail.next = list2;
-                list2 = list2.next;
-            }
+        while (!pq.isEmpty()) {
+            Node min = pq.poll();
+            tail.next = min;
             tail = tail.next;
+
+            if (min.next != null) {
+                pq.offer(min.next);
+            }
         }
-        tail.next = (list1 != null)? list1 : list2;
         return dummy.next;
     }
 
-    void main(){
+    public static void main(String[] args) {
         LLleet sol = new LLleet();
-        Node l1 = new Node(1);
-        l1.next = new Node(2);
-        l1.next.next = new Node(4);
 
-        Node l2 = new Node(1);
-        l2.next = new Node(3);
-        l2.next.next = new Node(4);
+        Node[] lists = new Node[3];
 
-        Node merge = sol.MeregeTwoSortedList(l1, l2);
-        sol.print(merge);
+        lists[0] = new Node(1);
+        lists[0].next = new Node(4);
+        lists[0].next.next = new Node(5);
+
+        lists[1] = new Node(1);
+        lists[1].next = new Node(3);
+        lists[1].next.next = new Node(4);
+
+        lists[2] = new Node(2);
+        lists[2].next = new Node(6);
+
+        sol.Print(lists[0]);
+
+        sol.Print(lists[1]);
+
+        sol.Print(lists[2]);
+
+        System.err.println("Merged: ");
+        Node merged = sol.mergeKLists(lists);
+        sol.Print(merged);  
     }
 }
