@@ -618,21 +618,113 @@ import java.util.*;
 
 import java.util.PriorityQueue;
 
+// class Node{
+//     int data;
+//     Node next;
+//     Node prev;
+
+//     Node(int data){
+//         this.data = data;
+//         this.next = null;
+//         this.prev = null;
+//     }
+// }
+
+// public class LLleet {
+// Node head;
+
+//     void add(int data){
+//         Node newNode = new Node(data);
+//         if(head == null){
+//             head = newNode;
+//             return;
+//         }
+//         Node temp = head;
+//         while(temp.next != null){
+//             temp = temp.next;
+//         }
+//         temp.next = newNode;
+//         newNode.prev = temp;
+//     }
+//     void Print(Node node) {
+//         System.out.print("List: ");
+//         if (node == null) {
+//             System.out.println("List is empty");
+//             return;
+//         }
+//         while (node != null) {
+//             System.out.print(node.data);
+//             if (node.next != null) System.out.print(" <-> ");
+//             node = node.next;
+//         }
+//         System.out.println(" <-> NULL");
+//     }
+
+//     Node mergeKLists(Node[] lists) {
+//         PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.data - b.data);
+
+//         for (Node node : lists) {
+//             if (node != null) pq.offer(node);
+//         }
+
+//         Node dummy = new Node(-1);
+//         Node tail = dummy;
+
+//         while (!pq.isEmpty()) {
+//             Node min = pq.poll();
+//             tail.next = min;
+//             tail = tail.next;
+
+//             if (min.next != null) {
+//                 pq.offer(min.next);
+//             }
+//         }
+//         return dummy.next;
+//     }
+
+//     public static void main(String[] args) {
+//         LLleet sol = new LLleet();
+
+//         Node[] lists = new Node[3];
+
+//         lists[0] = new Node(1);
+//         lists[0].next = new Node(4);
+//         lists[0].next.next = new Node(5);
+
+//         lists[1] = new Node(1);
+//         lists[1].next = new Node(3);
+//         lists[1].next.next = new Node(4);
+
+//         lists[2] = new Node(2);
+//         lists[2].next = new Node(6);
+
+//         sol.Print(lists[0]);
+
+//         sol.Print(lists[1]);
+
+//         sol.Print(lists[2]);
+
+//         System.err.println("Merged: ");
+//         Node merged = sol.mergeKLists(lists);
+//         sol.Print(merged);  
+//     }
+// }
+
+// 3) Merge In Between Lists
+// Ek list me do positions ke beech dusri list insert kar =====================================>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 class Node{
     int data;
     Node next;
-    Node prev;
-
     Node(int data){
         this.data = data;
         this.next = null;
-        this.prev = null;
     }
 }
 
 public class LLleet {
-Node head;
-
+    Node head;
+    
     void add(int data){
         Node newNode = new Node(data);
         if(head == null){
@@ -644,68 +736,61 @@ Node head;
             temp = temp.next;
         }
         temp.next = newNode;
-        newNode.prev = temp;
     }
-    void Print(Node node) {
-        System.out.print("List: ");
-        if (node == null) {
-            System.out.println("List is empty");
-            return;
+    
+    void Print(Node node){  // Parameter add kiya
+        Node curr = node;
+        while (curr != null) {
+            System.out.print(curr.data + " -> ");
+            curr = curr.next;
         }
-        while (node != null) {
-            System.out.print(node.data);
-            if (node.next != null) System.out.print(" <-> ");
-            node = node.next;
-        }
-        System.out.println(" <-> NULL");
+        System.out.println("Null");
     }
 
-    Node mergeKLists(Node[] lists) {
-        PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.data - b.data);
-
-        for (Node node : lists) {
-            if (node != null) pq.offer(node);
+    Node mergeInbW(Node list1, int a, int b, Node list2){
+        Node start = list1;
+        for(int i = 1; i < a; i++){
+            start = start.next;
         }
-
-        Node dummy = new Node(-1);
-        Node tail = dummy;
-
-        while (!pq.isEmpty()) {
-            Node min = pq.poll();
-            tail.next = min;
-            tail = tail.next;
-
-            if (min.next != null) {
-                pq.offer(min.next);
-            }
+        Node end = start;
+        for(int i = a; i <= b; i++){
+            end = end.next;
+        }        
+        start.next = list2;       
+        Node temp = list2;
+        while(temp.next != null){
+            temp = temp.next;
         }
-        return dummy.next;
+        temp.next = end;       
+        return list1;
     }
 
-    public static void main(String[] args) {
+        void main(){
         LLleet sol = new LLleet();
+        
+        LLleet list1Obj = new LLleet();
+        list1Obj.add(1);
+        list1Obj.add(2);
+        list1Obj.add(3);
+        list1Obj.add(4);
+        list1Obj.add(5);
+        Node list1 = list1Obj.head;
 
-        Node[] lists = new Node[3];
+        LLleet list2Obj = new LLleet();
+        list2Obj.add(10);
+        list2Obj.add(20);
+        list2Obj.add(30);
+        Node list2 = list2Obj.head;
 
-        lists[0] = new Node(1);
-        lists[0].next = new Node(4);
-        lists[0].next.next = new Node(5);
+        int a = 2;  
+        int b = 3;  
 
-        lists[1] = new Node(1);
-        lists[1].next = new Node(3);
-        lists[1].next.next = new Node(4);
-
-        lists[2] = new Node(2);
-        lists[2].next = new Node(6);
-
-        sol.Print(lists[0]);
-
-        sol.Print(lists[1]);
-
-        sol.Print(lists[2]);
-
-        System.err.println("Merged: ");
-        Node merged = sol.mergeKLists(lists);
-        sol.Print(merged);  
+        System.out.println("Before:");
+        sol.Print(list1);
+        
+        Node ans = sol.mergeInbW(list1, a, b, list2);
+        
+        System.out.println("After:");
+        sol.Print(ans);
     }
 }
